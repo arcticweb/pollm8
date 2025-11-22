@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Lock, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { TRANSLATIONS } from '../../config/language.config';
 
@@ -54,42 +54,32 @@ export function SignInModal({ isOpen, onClose, onSwitchToSignUp }: SignInModalPr
             <label className="label">
               <span className="label-text font-semibold text-base">{t.auth.email}</span>
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Mail className="w-5 h-5 opacity-50" style={{ color: 'currentColor' }} />
-              </div>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input input-bordered w-full pl-10 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
-                placeholder="you@example.com"
-                required
-                disabled={loading}
-                style={{ borderWidth: '2px' }}
-              />
-            </div>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="input input-bordered w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+              placeholder="you@example.com"
+              required
+              disabled={loading}
+              style={{ borderWidth: '2px' }}
+            />
           </div>
 
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold text-base">{t.auth.password}</span>
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Lock className="w-5 h-5 opacity-50" style={{ color: 'currentColor' }} />
-              </div>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input input-bordered w-full pl-10 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
-                placeholder="••••••••"
-                required
-                disabled={loading}
-                style={{ borderWidth: '2px' }}
-              />
-            </div>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input input-bordered w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+              placeholder="••••••••"
+              required
+              disabled={loading}
+              style={{ borderWidth: '2px' }}
+            />
             <label className="label">
               <span className="label-text-alt"></span>
               <a href="#" className="label-text-alt link link-primary hover:link-hover">
