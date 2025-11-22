@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Vote, Settings, User, LogOut, Menu } from 'lucide-react';
+import { Vote, Settings, User, LogOut, Menu, Shield } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { TRANSLATIONS } from '../../config/language.config';
@@ -96,7 +96,7 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
 
           {user ? (
             <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar hover:ring-2 hover:ring-primary transition-all">
                 <div className="w-10 rounded-full bg-primary text-primary-content flex items-center justify-center">
                   {profile?.avatar_url ? (
                     <img src={profile.avatar_url} alt={profile.username} />
@@ -107,25 +107,33 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-box w-52 border border-base-300"
               >
                 <li className="menu-title">
-                  <span>{profile?.username}</span>
+                  <span className="text-lg font-bold">{profile?.username}</span>
                 </li>
                 <li>
-                  <button onClick={() => onNavigate('profile')}>
+                  <button onClick={() => onNavigate('profile')} className="hover:bg-primary hover:text-primary-content transition-colors">
                     <User className="w-4 h-4" />
                     {t.profile.profile}
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => onNavigate('settings')}>
+                  <button onClick={() => onNavigate('settings')} className="hover:bg-primary hover:text-primary-content transition-colors">
                     <Settings className="w-4 h-4" />
                     {t.settings.settings}
                   </button>
                 </li>
+                {profile?.is_admin && (
+                  <li>
+                    <button onClick={() => onNavigate('admin')} className="hover:bg-warning hover:text-warning-content transition-colors">
+                      <Shield className="w-4 h-4" />
+                      Admin Panel
+                    </button>
+                  </li>
+                )}
                 <li>
-                  <button onClick={handleSignOut}>
+                  <button onClick={handleSignOut} className="hover:bg-error hover:text-error-content transition-colors">
                     <LogOut className="w-4 h-4" />
                     {t.auth.signOut}
                   </button>
@@ -136,13 +144,13 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
             <>
               <button
                 onClick={() => setShowSignIn(true)}
-                className="btn btn-ghost btn-sm"
+                className="btn btn-outline btn-sm hover:btn-primary hover:scale-105 transition-all"
               >
                 {t.auth.signIn}
               </button>
               <button
                 onClick={() => setShowSignUp(true)}
-                className="btn btn-primary btn-sm"
+                className="btn btn-primary btn-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all"
               >
                 {t.auth.signUp}
               </button>

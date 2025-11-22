@@ -18,6 +18,9 @@ export interface Database {
           bio: string | null
           is_verified: boolean
           verification_level: 'none' | 'email' | 'phone' | 'id' | 'full'
+          is_admin: boolean
+          admin_level: 'none' | 'moderator' | 'admin' | 'super_admin'
+          admin_notes: string | null
           created_at: string
           updated_at: string
         }
@@ -29,6 +32,9 @@ export interface Database {
           bio?: string | null
           is_verified?: boolean
           verification_level?: 'none' | 'email' | 'phone' | 'id' | 'full'
+          is_admin?: boolean
+          admin_level?: 'none' | 'moderator' | 'admin' | 'super_admin'
+          admin_notes?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -40,6 +46,9 @@ export interface Database {
           bio?: string | null
           is_verified?: boolean
           verification_level?: 'none' | 'email' | 'phone' | 'id' | 'full'
+          is_admin?: boolean
+          admin_level?: 'none' | 'moderator' | 'admin' | 'super_admin'
+          admin_notes?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -427,6 +436,79 @@ export interface Database {
           last_used_at?: string | null
           expires_at?: string | null
           is_active?: boolean
+          created_at?: string
+        }
+      }
+      verification_requests: {
+        Row: {
+          id: string
+          profile_id: string
+          request_type: 'email' | 'phone' | 'id' | 'full'
+          request_data: Json
+          status: 'pending' | 'approved' | 'rejected'
+          reviewed_by: string | null
+          reviewed_at: string | null
+          review_notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          profile_id: string
+          request_type: 'email' | 'phone' | 'id' | 'full'
+          request_data?: Json
+          status?: 'pending' | 'approved' | 'rejected'
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          review_notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          profile_id?: string
+          request_type?: 'email' | 'phone' | 'id' | 'full'
+          request_data?: Json
+          status?: 'pending' | 'approved' | 'rejected'
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          review_notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      admin_actions: {
+        Row: {
+          id: string
+          admin_id: string
+          action_type: string
+          target_type: string
+          target_id: string | null
+          action_data: Json
+          ip_address: string | null
+          user_agent: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          admin_id: string
+          action_type: string
+          target_type: string
+          target_id?: string | null
+          action_data?: Json
+          ip_address?: string | null
+          user_agent?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          admin_id?: string
+          action_type?: string
+          target_type?: string
+          target_id?: string | null
+          action_data?: Json
+          ip_address?: string | null
+          user_agent?: string | null
           created_at?: string
         }
       }

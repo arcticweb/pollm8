@@ -6,6 +6,7 @@ import { LandingPage } from './pages/LandingPage';
 import { TopicsPage } from './pages/TopicsPage';
 import { CreateTopicPage } from './pages/CreateTopicPage';
 import { TopicDetailPage } from './pages/TopicDetailPage';
+import { AdminPage } from './pages/AdminPage';
 import { SignUpModal } from './components/auth/SignUpModal';
 
 function AppContent() {
@@ -81,6 +82,10 @@ function AppContent() {
             </div>
           </div>
         </div>
+      )}
+
+      {currentPage === 'admin' && user && (
+        <AdminPage onNavigate={handleNavigate} />
       )}
 
       {!user && currentPage !== 'landing' && currentPage !== 'topic' && (
