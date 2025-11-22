@@ -54,32 +54,42 @@ export function SignInModal({ isOpen, onClose, onSwitchToSignUp }: SignInModalPr
             <label className="label">
               <span className="label-text font-semibold text-base">{t.auth.email}</span>
             </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="input input-bordered w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
-              placeholder="you@example.com"
-              required
-              disabled={loading}
-              style={{ borderWidth: '2px' }}
-            />
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-base-content/40">
+                <i className="fas fa-envelope"></i>
+              </span>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input input-bordered w-full pl-12 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                placeholder="you@example.com"
+                required
+                disabled={loading}
+                style={{ borderWidth: '2px' }}
+              />
+            </div>
           </div>
 
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold text-base">{t.auth.password}</span>
             </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input input-bordered w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
-              placeholder="••••••••"
-              required
-              disabled={loading}
-              style={{ borderWidth: '2px' }}
-            />
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-base-content/40">
+                <i className="fas fa-lock"></i>
+              </span>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input input-bordered w-full pl-12 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                placeholder="••••••••"
+                required
+                disabled={loading}
+                style={{ borderWidth: '2px' }}
+              />
+            </div>
             <label className="label">
               <span className="label-text-alt"></span>
               <a href="#" className="label-text-alt link link-primary hover:link-hover">
