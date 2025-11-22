@@ -1,0 +1,41 @@
+{
+  "name": "VoteHub - Know What Everyone Thinks",
+  "short_name": "VoteHub",
+  "description": "Poll your family, friends, or the entire planet. Create surveys, gather opinions, and discover insights.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "social"],
+  "shortcuts": [
+    {
+      "name": "Create Poll",
+      "short_name": "Create",
+      "description": "Create a new poll",
+      "url": "/create",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Browse Topics",
+      "short_name": "Browse",
+      "description": "Browse all topics",
+      "url": "/topics",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
