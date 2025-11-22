@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { X } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { TRANSLATIONS } from '../../config/language.config';
 
@@ -36,36 +37,65 @@ export function SignInModal({ isOpen, onClose, onSwitchToSignUp }: SignInModalPr
 
   return (
     <div className="modal modal-open">
-      <div className="modal-box">
-        <h3 className="font-bold text-2xl mb-6">{t.auth.signIn}</h3>
+      <div className="modal-box max-w-md">
+        <button
+          onClick={onClose}
+          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          type="button"
+        >
+          <X className="w-4 h-4" />
+        </button>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <h3 className="font-bold text-3xl mb-2">{t.auth.signIn}</h3>
+        <p className="text-base-content/60 mb-6">Welcome back! Please sign in to continue.</p>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="form-control">
             <label className="label">
-              <span className="label-text">{t.auth.email}</span>
+              <span className="label-text font-semibold text-base">{t.auth.email}</span>
             </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="input input-bordered w-full"
-              required
-              disabled={loading}
-            />
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-base-content/40">
+                <i className="fas fa-envelope"></i>
+              </span>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input input-bordered w-full pl-12 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                placeholder="you@example.com"
+                required
+                disabled={loading}
+                style={{ borderWidth: '2px' }}
+              />
+            </div>
           </div>
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">{t.auth.password}</span>
+              <span className="label-text font-semibold text-base">{t.auth.password}</span>
             </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input input-bordered w-full"
-              required
-              disabled={loading}
-            />
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-base-content/40">
+                <i className="fas fa-lock"></i>
+              </span>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input input-bordered w-full pl-12 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+                placeholder="••••••••"
+                required
+                disabled={loading}
+                style={{ borderWidth: '2px' }}
+              />
+            </div>
+            <label className="label">
+              <span className="label-text-alt"></span>
+              <a href="#" className="label-text-alt link link-primary hover:link-hover">
+                {t.auth.forgotPassword}
+              </a>
+            </label>
           </div>
 
           {error && (
@@ -74,28 +104,32 @@ export function SignInModal({ isOpen, onClose, onSwitchToSignUp }: SignInModalPr
             </div>
           )}
 
-          <div className="modal-action">
+          <div className="form-control mt-6">
             <button
-              type="button"
-              onClick={onClose}
-              className="btn btn-ghost"
+              type="submit"
+              className="btn btn-primary w-full shadow-lg hover:shadow-xl transition-all"
               disabled={loading}
             >
-              {t.common.cancel}
-            </button>
-            <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? t.common.loading : t.auth.signIn}
+              {loading ? (
+                <>
+                  <span className="loading loading-spinner loading-sm"></span>
+                  {t.common.loading}
+                </>
+              ) : (
+                t.auth.signIn
+              )}
             </button>
           </div>
         </form>
 
-        <div className="divider"></div>
+        <div className="divider text-base-content/50">OR</div>
 
-        <p className="text-center text-sm">
+        <p className="text-center">
           {t.auth.dontHaveAccount}{' '}
           <button
             onClick={onSwitchToSignUp}
-            className="link link-primary"
+            className="link link-primary font-semibold hover:link-hover"
+            type="button"
             disabled={loading}
           >
             {t.auth.signUp}

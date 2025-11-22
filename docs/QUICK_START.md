@@ -211,7 +211,19 @@ npm run build
 
 ## Deploy to Production
 
-### Vercel (Recommended)
+### GitHub Pages (Configured)
+```bash
+npm run build
+git add dist -f
+git commit -m "Deploy to GitHub Pages"
+git push origin main
+```
+
+Then configure in GitHub: Settings > Pages > Source: `/dist` folder
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for full guide.
+
+### Vercel (Alternative)
 ```bash
 npm install -g vercel
 vercel
@@ -219,7 +231,7 @@ vercel
 
 Add environment variables in Vercel dashboard.
 
-### Netlify
+### Netlify (Alternative)
 ```bash
 npm install -g netlify-cli
 npm run build
