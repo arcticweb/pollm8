@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Mail, Lock, User as UserIcon, X } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { TRANSLATIONS } from '../../config/language.config';
 
@@ -49,64 +50,100 @@ export function SignUpModal({ isOpen, onClose, onSwitchToSignIn }: SignUpModalPr
 
   return (
     <div className="modal modal-open">
-      <div className="modal-box">
-        <h3 className="font-bold text-2xl mb-6">{t.auth.signUp}</h3>
+      <div className="modal-box max-w-md">
+        <button
+          onClick={onClose}
+          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          type="button"
+        >
+          <X className="w-4 h-4" />
+        </button>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <h3 className="font-bold text-3xl mb-2">{t.auth.signUp}</h3>
+        <p className="text-base-content/60 mb-6">Create your account to get started.</p>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div className="form-control">
             <label className="label">
-              <span className="label-text">{t.profile.username}</span>
+              <span className="label-text font-semibold text-base">{t.profile.username}</span>
             </label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="input input-bordered w-full"
-              required
-              disabled={loading}
-            />
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <UserIcon className="w-5 h-5 text-base-content/40" />
+              </div>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="input input-bordered w-full pl-10 focus:input-primary transition-all"
+                placeholder="johndoe"
+                required
+                disabled={loading}
+              />
+            </div>
           </div>
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">{t.auth.email}</span>
+              <span className="label-text font-semibold text-base">{t.auth.email}</span>
             </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="input input-bordered w-full"
-              required
-              disabled={loading}
-            />
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <Mail className="w-5 h-5 text-base-content/40" />
+              </div>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input input-bordered w-full pl-10 focus:input-primary transition-all"
+                placeholder="you@example.com"
+                required
+                disabled={loading}
+              />
+            </div>
           </div>
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">{t.auth.password}</span>
+              <span className="label-text font-semibold text-base">{t.auth.password}</span>
             </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input input-bordered w-full"
-              required
-              disabled={loading}
-            />
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <Lock className="w-5 h-5 text-base-content/40" />
+              </div>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input input-bordered w-full pl-10 focus:input-primary transition-all"
+                placeholder="••••••••"
+                required
+                disabled={loading}
+              />
+            </div>
+            <label className="label">
+              <span className="label-text-alt text-base-content/60">At least 6 characters</span>
+            </label>
           </div>
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">{t.auth.confirmPassword}</span>
+              <span className="label-text font-semibold text-base">{t.auth.confirmPassword}</span>
             </label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="input input-bordered w-full"
-              required
-              disabled={loading}
-            />
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <Lock className="w-5 h-5 text-base-content/40" />
+              </div>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="input input-bordered w-full pl-10 focus:input-primary transition-all"
+                placeholder="••••••••"
+                required
+                disabled={loading}
+              />
+            </div>
           </div>
 
           {error && (
@@ -115,28 +152,32 @@ export function SignUpModal({ isOpen, onClose, onSwitchToSignIn }: SignUpModalPr
             </div>
           )}
 
-          <div className="modal-action">
+          <div className="form-control mt-6">
             <button
-              type="button"
-              onClick={onClose}
-              className="btn btn-ghost"
+              type="submit"
+              className="btn btn-primary w-full shadow-lg hover:shadow-xl transition-all"
               disabled={loading}
             >
-              {t.common.cancel}
-            </button>
-            <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? t.common.loading : t.auth.signUp}
+              {loading ? (
+                <>
+                  <span className="loading loading-spinner loading-sm"></span>
+                  {t.common.loading}
+                </>
+              ) : (
+                t.auth.signUp
+              )}
             </button>
           </div>
         </form>
 
-        <div className="divider"></div>
+        <div className="divider text-base-content/50">OR</div>
 
-        <p className="text-center text-sm">
+        <p className="text-center">
           {t.auth.alreadyHaveAccount}{' '}
           <button
             onClick={onSwitchToSignIn}
-            className="link link-primary"
+            className="link link-primary font-semibold hover:link-hover"
+            type="button"
             disabled={loading}
           >
             {t.auth.signIn}
