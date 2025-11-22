@@ -56,16 +56,17 @@ export function SignInModal({ isOpen, onClose, onSwitchToSignUp }: SignInModalPr
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Mail className="w-5 h-5 text-base-content/40" />
+                <Mail className="w-5 h-5 opacity-50" style={{ color: 'currentColor' }} />
               </div>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input input-bordered w-full pl-10 focus:input-primary transition-all"
+                className="input input-bordered w-full pl-10 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                 placeholder="you@example.com"
                 required
                 disabled={loading}
+                style={{ borderWidth: '2px' }}
               />
             </div>
           </div>
@@ -76,16 +77,17 @@ export function SignInModal({ isOpen, onClose, onSwitchToSignUp }: SignInModalPr
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Lock className="w-5 h-5 text-base-content/40" />
+                <Lock className="w-5 h-5 opacity-50" style={{ color: 'currentColor' }} />
               </div>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input input-bordered w-full pl-10 focus:input-primary transition-all"
+                className="input input-bordered w-full pl-10 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                 placeholder="••••••••"
                 required
                 disabled={loading}
+                style={{ borderWidth: '2px' }}
               />
             </div>
             <label className="label">

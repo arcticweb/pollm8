@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /* Ensure inputs are always visible with proper borders */
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    @apply border-2 border-base-300 bg-base-100;
+  }
+
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="text"]:focus {
+    @apply border-primary ring-2 ring-primary ring-opacity-30 outline-none;
+  }
+}
+
+@layer components {
+  /* Enhanced input styling */
+  .input {
+    @apply border-2 border-base-300 bg-base-100;
+  }
+
+  .input:focus {
+    @apply border-primary ring-2 ring-primary ring-opacity-30;
+  }
+
+  .input-bordered {
+    @apply border-2 border-base-300;
+  }
+
+  /* Icon container styling */
+  .input-icon {
+    @apply text-base-content opacity-40;
+  }
+}
