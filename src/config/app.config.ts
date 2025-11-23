@@ -22,8 +22,8 @@ export const APP_CONFIG = {
   },
 
   ui: {
-    defaultTheme: 'votelight',
-    darkTheme: 'votedark',
+    defaultTheme: 'light',
+    darkTheme: 'dark',
     enableThemeSwitcher: true,
     enableAccessibilityFeatures: true,
     defaultFontSize: 16,
