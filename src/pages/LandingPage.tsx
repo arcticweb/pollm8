@@ -1,5 +1,6 @@
 import { TrendingUp, Shield, Zap, Users, BarChart, Lock } from 'lucide-react';
 import { TRANSLATIONS } from '../config/language.config';
+import { useAuth } from '../contexts/AuthContext';
 
 const t = TRANSLATIONS.en;
 
@@ -8,7 +9,8 @@ interface LandingPageProps {
   onShowSignUp: () => void;
 }
 
-export function LandingPage({ onShowSignUp }: LandingPageProps) {
+export function LandingPage({ onNavigate, onShowSignUp }: LandingPageProps) {
+  const { user } = useAuth();
   const features = [
     {
       icon: <Zap className="w-12 h-12" />,
@@ -57,7 +59,10 @@ export function LandingPage({ onShowSignUp }: LandingPageProps) {
               {t.landing.hero.description}
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <button onClick={onShowSignUp} className="btn btn-primary btn-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+              <button
+                onClick={() => user ? onNavigate('create-topic') : onShowSignUp()}
+                className="btn btn-primary btn-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
+              >
                 {t.landing.hero.cta}
               </button>
               <button className="btn btn-outline btn-lg hover:btn-secondary hover:scale-105 transition-all duration-300">
@@ -125,7 +130,10 @@ export function LandingPage({ onShowSignUp }: LandingPageProps) {
           <p className="text-xl mb-8 opacity-90">
             {t.landing.cta.description}
           </p>
-          <button onClick={onShowSignUp} className="btn btn-lg bg-base-100 text-primary hover:bg-base-200 shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 border-2 border-base-100">
+          <button
+            onClick={() => user ? onNavigate('create-topic') : onShowSignUp()}
+            className="btn btn-lg bg-base-100 text-primary hover:bg-base-200 shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 border-2 border-base-100"
+          >
             {t.landing.cta.button}
           </button>
         </div>

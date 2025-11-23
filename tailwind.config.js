@@ -11,7 +11,6 @@ export default {
     base: true,
     styled: true,
     utils: true,
-    prefix: '',
     logs: false,
     themeRoot: ':root',
   },

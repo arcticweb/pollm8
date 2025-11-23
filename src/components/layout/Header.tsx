@@ -71,26 +71,33 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
 
         <div className="navbar-end gap-2">
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <label tabIndex={0} className="btn btn-ghost btn-circle hover:bg-base-200 transition-colors">
               <Settings className="w-5 h-5" />
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 max-h-96 overflow-y-auto"
+              className="dropdown-content z-[1] menu p-3 shadow-xl bg-base-100 border border-base-300 rounded-box w-64 max-h-96 overflow-y-auto"
             >
-              <li className="menu-title">
-                <span>{t.settings.theme}</span>
+              <li className="menu-title px-3 py-2">
+                <span className="text-sm font-bold uppercase tracking-wide text-base-content/60">{t.settings.theme}</span>
               </li>
-              {availableThemes.map((themeName) => (
-                <li key={themeName}>
-                  <button
-                    onClick={() => setTheme(themeName)}
-                    className={theme === themeName ? 'active' : ''}
-                  >
-                    {themeName}
-                  </button>
-                </li>
-              ))}
+              <div className="divider my-1"></div>
+              <div className="grid grid-cols-2 gap-2 p-2">
+                {availableThemes.map((themeName) => (
+                  <li key={themeName} className="w-full">
+                    <button
+                      onClick={() => setTheme(themeName)}
+                      className={`justify-center capitalize font-medium transition-all ${
+                        theme === themeName
+                          ? 'bg-primary text-primary-content hover:bg-primary/90'
+                          : 'hover:bg-base-200'
+                      }`}
+                    >
+                      {themeName}
+                    </button>
+                  </li>
+                ))}
+              </div>
             </ul>
           </div>
 
