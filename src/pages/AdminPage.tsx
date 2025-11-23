@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Shield, Users, FileText, CheckCircle, XCircle, Activity, Trash2, Search } from 'lucide-react';
+import { Shield, Users, FileText, CheckCircle, XCircle, Activity, Trash2, Search, Folder, Tag, Database as DatabaseIcon } from 'lucide-react';
 import { adminService } from '../services/adminService';
+import { CategoriesManager } from '../components/admin/CategoriesManager';
+import { DataSourcesManager } from '../components/admin/DataSourcesManager';
 import type { Database } from '../types/database.types';
 
 type Profile = Database['public']['Tables']['profiles']['Row'];
@@ -12,7 +14,7 @@ interface AdminPageProps {
 
 export function AdminPage({ onNavigate }: AdminPageProps) {
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'users' | 'topics' | 'verifications' | 'logs'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'users' | 'topics' | 'verifications' | 'logs' | 'categories' | 'data-sources'>('dashboard');
   const [stats, setStats] = useState({ totalUsers: 0, totalTopics: 0, totalVotes: 0, pendingVerifications: 0 });
   const [users, setUsers] = useState<Profile[]>([]);
   const [topics, setTopics] = useState<any[]>([]);
@@ -187,6 +189,20 @@ export function AdminPage({ onNavigate }: AdminPageProps) {
         >
           <Activity className="w-4 h-4 mr-2" />
           Activity Log
+        </button>
+        <button
+          className={`tab tab-lg transition-all ${activeTab === 'categories' ? 'tab-active bg-primary text-primary-content' : 'hover:bg-base-300'}`}
+          onClick={() => handleTabChange('categories')}
+        >
+          <Folder className="w-4 h-4 mr-2" />
+          Categories
+        </button>
+        <button
+          className={`tab tab-lg transition-all ${activeTab === 'data-sources' ? 'tab-active bg-primary text-primary-content' : 'hover:bg-base-300'}`}
+          onClick={() => handleTabChange('data-sources')}
+        >
+          <DatabaseIcon className="w-4 h-4 mr-2" />
+          Data Sources
         </button>
       </div>
 
@@ -416,6 +432,10 @@ export function AdminPage({ onNavigate }: AdminPageProps) {
           </table>
         </div>
       )}
+
+      {activeTab === 'categories' && <CategoriesManager />}
+
+      {activeTab === 'data-sources' && <DataSourcesManager />}
     </div>
   );
 }
